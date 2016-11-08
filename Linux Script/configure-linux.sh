@@ -133,7 +133,7 @@ checkLinuxLogglyCompatibility()
 
 	#check if selinux service is enforced. if yes, ask the user to manually disable and exit the script
 	checkIfSelinuxServiceEnforced
-	
+
 	#update rsyslog.conf and adds $MaxMessageSize in it
 	modifyMaxMessageSize
 
@@ -156,10 +156,10 @@ installLogglyConf()
 	#create rsyslog dir if it doesn't exist, Modify the permission on rsyslog directory if exist on Ubuntu
 	createRsyslogDir
 
-	if [ "$LINUX_DO_VERIFICATION" = "true" ]; then
+	# if [ "$LINUX_DO_VERIFICATION" = "true" ]; then
 		#check if the logs are going to loggly fro linux system now
-		checkIfLogsMadeToLoggly
-	fi
+		# checkIfLogsMadeToLoggly
+	# fi
 
 	if [ "$IS_INVOKED" = "" ]; then
 		logMsgToConfigSysLog "SUCCESS" "SUCCESS: Linux system successfully configured to send logs via Loggly."
@@ -407,7 +407,7 @@ checkIfSystemdConfigured()
 		cp /etc/systemd/journald.conf /etc/systemd/journald.conf.loggly.bk
 		sed -i 's/.*ForwardToSyslog.*/ForwardToSyslog=Yes/g' /etc/systemd/journald.conf
 		logMsgToConfigSysLog "INFO" "INFO: Restarting Systemd-journald"
-		systemctl restart systemd-journald 
+		systemctl restart systemd-journald
 	fi
 }
 
